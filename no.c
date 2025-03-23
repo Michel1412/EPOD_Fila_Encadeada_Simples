@@ -85,19 +85,22 @@ void inserir_ordenado(No **lista, int num) {
 			
 		}
 		
-		imprimirNovo(novo);
+    	printf("\n Endereco da Lista: %p\n Conteudo Lista: %p", &lista, *lista);
+    	printf("\n Endereco do Novo: %p\n Conteudo Novo: %p", &novo, novo);
 	} else {
 		printf("Erro ao alocar memoria");
 	}
 }
 
 void imprimir(No *no) {
+	printf("\n------------------------------------------------------------");
 	printf("\nEndereco Lista: %p", &no);
-	printf("\nConteudo Lista: ");
+	printf("\nConteudo Lista: %p", no);
+	printf("\n------------------------------------------------------------");
 	int i = 0;
 	
 	while (no) {
-		printf("\n %d - %d => %p", i++, no->valor, no);
+		printf("\n %d - %d => Endereco: %p\n            Proximo: %p", i++, no->valor, no, no->prox);
 		no = no->prox;
 	}
 	
@@ -105,8 +108,48 @@ void imprimir(No *no) {
 }
 
 void imprimirNovo(No *novo) {
-    printf("\nValor do Novo no: %p, Endereco Proximo: %p", novo, novo->prox);
-    printf("\nEndereco de Novo(variavel): %p, Conteudo de Novo: %d", &novo, novo->valor);
+	printf("\n------------------------------------------------------------");
+    printf("\n Valor do Novo no: %p\n Endereco Novo->Proximo: %p", novo, novo->prox);
+	printf("\n------------------------------------------------------------");
+    printf("\n Endereco de Novo(variavel): %p\n Conteudo de Novo: %d", &novo, novo->valor);
+	printf("\n------------------------------------------------------------");
     
     printf("\n");
 }
+
+No* remover(No **lista, int num) {
+	No *remover, *aux = NULL;
+	
+	if (*lista) {
+		if ((*lista)->valor == num) {
+			remover = *lista;
+			*lista = remover->prox;
+		
+		} else {
+			aux = *lista;
+		
+			while(aux->prox && aux->prox->valor != num) 
+				aux = aux->prox;
+			
+			if (aux->prox) {
+				remover = aux->prox;
+				aux->prox = remover->prox;
+			}	
+		}
+	}
+	
+	return remover;
+}
+
+No* buscar(No **lista, int num) {
+	No *aux = *lista;
+	
+	while(aux && aux->valor != num)
+		aux = aux->prox;
+	
+	if (aux) 
+		return aux;
+	else
+		return NULL;
+}
+

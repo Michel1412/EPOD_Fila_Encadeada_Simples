@@ -18,4 +18,8 @@ void imprimir(No *no);
 
 void imprimirNovo(No *lista);
 
+No* remover(No **lista, int num);
+
+No* buscar(No **lista, int num);
+
 #endif

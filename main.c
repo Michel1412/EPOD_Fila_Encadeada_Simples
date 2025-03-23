@@ -13,10 +13,10 @@ int perguntarValor() {
 
 int main(void) {
 	int opcao, valor, anterior;
-	No *lista = NULL;
+	No *removido, *no, *lista = NULL;
 	
 	do {
-		printf("\n0 - Sair\n1 - Inserir no inicio\n2 - Inserir no fim\n3 - Inserir no meio\n4 - Inserir no ordanado\n5 - Imprimir\n");
+		printf("\n0 - Sair\n1 - Inserir no inicio\n2 - Inserir no fim\n3 - Inserir no meio\n4 - Inserir no ordanado\n5 - Imprimir\n6 - Remover\n7 - Buscar\n");
 		scanf(" %d", &opcao);
 		
 		switch (opcao) {
@@ -45,6 +45,27 @@ int main(void) {
 			
 			case 5:
 				imprimir(lista);
+				break;
+				
+			case 6:
+				removido = remover(&lista, perguntarValor());
+				
+				if (removido) {
+					printf("\nRemovendo Elemento: %d", removido->valor);
+					free(removido);
+				} else 
+					printf("\nElemento nao encontrado");
+				
+				break;
+				
+			case 7:
+				no = buscar(&lista, perguntarValor());
+				
+				if (no) {
+					printf("\nElemento: %d", no->valor);
+				} else 
+					printf("\nElemento nao encontrado");
+				
 				break;
 					
 			default:
